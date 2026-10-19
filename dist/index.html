@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#151716">
+  <meta name="description" content="Twelve imaginary landscapes to drift through, and a place to listen in. ORBITE is a generative cinema studio that runs entirely in your browser.">
+  <title>ORBITE — cinema for curious ears</title>
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="stylesheet" href="./style.css?v=4">
+</head>
+<body>
+  <svg class="icon-defs" aria-hidden="true"><defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8Z"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4ZM17 8a6 6 0 0 1 0 8M20 5a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4Z"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M3 9V3h6m6 0h6v6M3 15v6h6m6 0h6v-6"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-5 5 5-5 5 5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+    <symbol id="i-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/></symbol>
+  </defs></svg>
+
+  <header class="masthead">
+    <a class="brand" href="./" aria-label="ORBITE, home"><span class="brand-orbit" aria-hidden="true"></span>ORBITE<span class="edition">N° 002</span></a>
+    <nav aria-label="Main navigation">
+      <button class="nav-link active" id="studioTab">The studio</button>
+      <button class="nav-link" id="notebookBtn">The notebook <span class="count" id="savedCount">0</span></button>
+      <button class="nav-link about-link" id="aboutBtn">The story <span>↗</span></button>
+    </nav>
+    <span class="live-label"><i></i> A LIVING INSTRUMENT</span>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div><p class="eyebrow">CINEMA FOR CURIOUS EARS</p><h1>Elsewhere begins <em>here.</em></h1></div>
+      <p class="intro-note">Choose a world. Give it a sound.<br>Bring something back from the journey.</p>
+    </section>
+
+    <section class="workspace" aria-label="Generative cinema studio">
+      <aside class="worlds-panel">
+        <div class="section-label"><span>THE DESTINATIONS</span><span>12 + ∞</span></div>
+        <div id="worldList" class="world-list"></div>
+        <button id="discoverBtn" class="discover-button"><svg><use href="#i-spark"/></svg><span>A new elsewhere</span><span>↗</span></button>
+        <div class="worlds-bottom"><span class="tiny-orbit" aria-hidden="true">✳</span><p>Places that do not exist.<br>Journeys that belong to you.</p></div>
+      </aside>
+
+      <div class="stage-column">
+        <div class="stage-meta"><span id="coordinates">SECTOR 07 · KEPLER</span><span><i class="live-dot"></i> <span id="renderStatus">LIVE RENDER</span></span></div>
+        <div class="stage" id="stage">
+          <canvas id="universe" aria-label="Animated imaginary landscape; move the pointer to shift your view"></canvas>
+          <div class="stage-vignette"></div>
+          <span class="frame-corner tl"></span><span class="frame-corner tr"></span><span class="frame-corner bl"></span><span class="frame-corner br"></span>
+          <div class="stage-top"><span id="filmBadge">STUDY No. 001</span><div class="stage-tools"><button id="pauseVisual" class="icon-button" aria-label="Pause the image" title="Pause image · Space"><svg><use href="#i-pause"/></svg></button><button id="fullscreenBtn" class="icon-button" aria-label="Fullscreen" title="Fullscreen · F"><svg><use href="#i-expand"/></svg></button></div></div>
+          <div class="stage-caption"><div><span class="caption-kicker" id="stageKicker">AN ELSEWHERE TO DISCOVER</span><h2 id="worldTitle">The gardens of Kepler</h2><p id="worldSubtitle">A spring with no witness</p></div><span class="world-number" id="worldNumber">01<span>/ XII</span></span></div>
+          <div class="record-overlay" id="recordOverlay" hidden><span class="record-dot"></span><span id="recordChapter">OPENING</span><span id="recordTime">00:00 / 00:24</span><button id="cancelRecord">Stop</button></div>
+          <div class="canvas-fallback" id="canvasFallback" hidden><p>This browser could not open the landscape.</p><span>Try Chrome or Safari with graphics acceleration enabled.</span></div>
+        </div>
+        <div class="stage-footer"><div class="seed-control"><span>SEED</span><input id="seedInput" type="number" min="1" max="999999" value="714029" aria-label="World seed"><button id="newSeed" title="New seed" aria-label="New seed">↻</button></div><span class="pointer-note">MOVE THE POINTER TO SHIFT YOUR VIEW</span><span id="qualityLabel">AUTO</span></div>
+        <div class="camera-bar"><label for="camera">CAMERA</label><select id="camera" aria-label="Camera movement"><option value="glide">Glide</option><option value="drift">Drift</option><option value="forward">Forward</option><option value="rise">Rising diagonal</option><option value="orbit">Orbit</option><option value="zoom">Slow zoom</option><option value="crane">Panoramic crane</option><option value="random">Random</option></select><span id="cameraNote">↗</span></div>
+      </div>
+
+      <aside class="inspector">
+        <div class="section-label"><span>THE STUFF OF DREAMS</span><span>↙</span></div>
+        <div class="sliders">
+          <label class="slider-label" for="speed"><span>Drift <span class="help-word">/ movement</span></span><output id="speedValue">35</output></label><input id="speed" type="range" min="0" max="100" value="35">
+          <label class="slider-label" for="grain"><span>Film grain</span><output id="grainValue">28</output></label><input id="grain" type="range" min="0" max="100" value="28">
+          <label class="slider-label" for="intensity"><span>Resonance <span class="help-word">/ sound → image</span></span><output id="intensityValue">55</output></label><input id="intensity" type="range" min="0" max="100" value="55">
+        </div>
+        <div class="palette-row"><span>TINT</span><div class="palette-options" id="paletteOptions">
+          <button data-palette="0" class="palette-chip selected" style="--swatch:#bd775b" aria-label="Original palette" title="Original" aria-pressed="true"></button>
+          <button data-palette="1" class="palette-chip" style="--swatch:#7caaa9" aria-label="Cyanotype palette" title="Cyanotype" aria-pressed="false"></button>
+          <button data-palette="2" class="palette-chip" style="--swatch:#dbb878" aria-label="Amber palette" title="Amber" aria-pressed="false"></button>
+          <button data-palette="3" class="palette-chip mono" aria-label="Silver palette" title="Silver" aria-pressed="false"></button>
+          <button data-palette="4" class="palette-chip" style="--swatch:#d99a98" aria-label="Dawn palette" title="Dawn" aria-pressed="false"></button>
+          <button data-palette="5" class="palette-chip" style="--swatch:#4c6aa8" aria-label="Night palette" title="Night" aria-pressed="false"></button>
+        </div></div>
+        <div class="sound-block"><div class="section-label"><span>THE SOUND OF THE JOURNEY</span><svg class="small-icon"><use href="#i-sound"/></svg></div>
+          <button id="audioBtn" class="audio-button"><span class="play-circle"><svg><use href="#i-play"/></svg></span><span><strong id="audioAction">Listen to the orbit</strong><small id="audioName">Thirty-two loops · a shared key</small></span><span class="mini-eq" id="miniEq"><i></i><i></i><i></i><i></i></span></button>
+          <div class="tape-bank" id="tapeBank">
+            <div class="tape-heading"><span id="layerCount">14 OF 32 LAYERS</span><button id="modeCycle" title="Change musical mode" aria-label="Change musical mode"><span id="musicKey">D MINOR</span> ↻</button><button id="rerollLoops" title="Draw new loop lengths" aria-label="Draw new lengths for the thirty-two loops">↻</button></div>
+            <div class="harmony-controls"><label class="slider-label" for="complexity"><span>Harmonic complexity</span><output id="complexityValue">45</output></label><input id="complexity" type="range" min="0" max="100" value="45"></div>
+            <div class="place-controls">
+              <div class="place-heading"><span>THE PLACE · EARS TO HORIZON</span><button id="holdSound" title="Keep these sound settings when you change world" aria-pressed="false">KEEP</button></div>
+              <div class="stage-grid">
+                <div><label class="slider-label" for="stageAmount"><span>Staging</span><output id="stageAmountValue">100</output></label><input id="stageAmount" type="range" min="0" max="100" value="100"><div class="scale-caption"><span>Flat</span><span>Deep</span></div></div>
+                <div><label class="slider-label" for="stageWalk"><span>Walking</span><output id="stageWalkValue">40</output></label><input id="stageWalk" type="range" min="0" max="100" value="40"><div class="scale-caption"><span>Still</span><span>Drifting</span></div></div>
+                <div><label class="slider-label" for="stageSize"><span>Space</span><output id="stageSizeValue">50</output></label><input id="stageSize" type="range" min="0" max="100" value="50"><div class="scale-caption"><span>Room</span><span>Vast</span></div></div>
+                <div><label class="slider-label" for="stageVariation"><span>Variation</span><output id="stageVariationValue">50</output></label><input id="stageVariation" type="range" min="0" max="100" value="50"><div class="scale-caption"><span>Exact</span><span>By hand</span></div></div>
+              </div>
+              <div class="stage-fields"><label for="stageListening">Listening on<select id="stageListening"><option value="headphones" selected>Headphones</option><option value="speakers">Speakers</option></select></label><label for="stageTimbre">Timbres<select id="stageTimbre"><option value="rich" selected>Richer</option><option value="classic">Classic</option></select></label></div>
+              <button id="motesToggle" class="motes-toggle" aria-pressed="true"><i></i> Show the sounds in the landscape</button>
+            </div>
+            <div class="pad-level"><label class="slider-label" for="stagePad"><span>Harmonic pad <small>THE FOUNDATION</small></span><output id="stagePadValue">70</output></label><input id="stagePad" type="range" min="0" max="100" value="70"></div>
+            <div id="tapeLoops" class="tape-loops"></div>
+            <div class="call-controls"><span>Call</span><button id="callUp" title="Rising call" aria-label="Rising call">↗</button><button id="callDown" title="Falling call" aria-label="Falling call">↘</button><span>PORTAMENTO</span></div>
+            <p class="tape-recurrence" id="tapeRecurrence">A continuous thread. Unpredictable encounters.</p>
+          </div>
+          <div class="volume-row"><label for="volume">Volume</label><input id="volume" type="range" min="0" max="100" value="50" aria-label="Audio volume"></div>
+          <button id="importBtn" class="import-button"><svg><use href="#i-upload"/></svg> Or drop your music here</button><input type="file" id="audioFile" accept="audio/*,.mp3,.wav,.m4a,.ogg,.flac" hidden>
+          <button id="resetAudio" class="text-button" hidden>Return to the ORBITE score</button>
+          <p class="privacy-note">Your music stays in this browser.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="action-bar" aria-label="Create and take away"><div class="action-left"><button id="surpriseBtn" class="button button-copper"><svg><use href="#i-spark"/></svg>Surprise me <span>↗</span></button><button id="saveBtn" class="button button-quiet"><svg><use href="#i-book"/></svg>Save this stop</button></div><div class="action-right"><button id="captureBtn" class="button button-quiet"><svg><use href="#i-download"/></svg>4K image</button><button id="recordBtn" class="button button-light"><svg><use href="#i-record"/></svg>Film 24 seconds</button></div></section>
+
+    <footer class="page-footer"><span><span class="footer-orbit">◌</span> ORBITE <span class="footer-separator">/</span> A FACTORY OF ELSEWHERES</span><span>No account to create. No cloud for your files. With curiosity.</span><button id="helpBtn">Shortcuts <span>?</span></button></footer>
+  </main>
+
+  <dialog id="notebookDialog" class="notebook-dialog"><div class="dialog-header"><div><p class="eyebrow">TRACES OF THE JOURNEY</p><h2>Your notebook of stops.</h2></div><button class="icon-button close-dialog" aria-label="Close notebook"><svg><use href="#i-close"/></svg></button></div><div id="notebookList"></div><div class="dialog-footer"><span>Saved in this browser.</span><div><button id="importNotebook" class="text-button">Import</button><button id="exportNotebook" class="text-button">Export notebook ↗</button></div></div><input id="notebookFile" type="file" accept="application/json,.json" hidden></dialog>
+  <dialog id="aboutDialog" class="about-dialog"><div class="dialog-header"><p class="eyebrow">ABOUT ORBITE</p><button class="icon-button close-dialog" aria-label="Close"><svg><use href="#i-close"/></svg></button></div><span class="about-mark">◌</span><h2>Places to drift through.<br>Places to listen in.</h2><p>ORBITE is a generative cinema studio that runs entirely in your browser. Twelve imaginary landscapes are drawn in real time, new places appear with every draw, and each landscape is also an acoustic place.</p><p>The sound is Loopra Stage: thirty-two independent loops in one shared key, every layer sitting at its own distance between your ears and the horizon. Loops of different lengths keep meeting in new ways, and no pass is ever the same take. Drop your own music onto the studio to let it travel through the landscape instead.</p><div class="about-facts"><span>Image and sound made here<br><strong>No model to download</strong></span><span>Built on a Mac mini<br><strong>M4 Pro · 64 GB</strong></span></div><p class="about-small">Landscapes are procedural and the sound is synthesized: no AI service is called and nothing leaves your browser. Video exports use the format your browser supports.</p><div class="studio-notes"><p class="eyebrow">STUDIO NOTES</p><h3>Listening to Thursday Afternoon</h3><p>In a 1985 interview, Brian Eno describes piano notes returning at different intervals and timbres shaped by tape speed. ORBITE offers an original interpretation: thirty-two independent cycles, long resonances, and a continuous bed of sound.</p><a href="https://www.muzines.co.uk/articles/the-sound-of-silence/9183" target="_blank" rel="noopener noreferrer">Read the 1985 interview ↗</a></div><button class="button button-copper close-dialog">Enter the studio ↗</button></dialog>
+  <dialog id="helpDialog" class="help-dialog"><div class="dialog-header"><h2>A few gestures.</h2><button class="icon-button close-dialog" aria-label="Close"><svg><use href="#i-close"/></svg></button></div><dl><div><dt>Space</dt><dd>Pause / resume the image</dd></div><div><dt>S</dt><dd>A new surprise</dd></div><div><dt>M</dt><dd>Play / pause the sound</dd></div><div><dt>F</dt><dd>A world in fullscreen</dd></div><div><dt>1 — 9, 0, − =</dt><dd>Change destination</dd></div><div><dt>Pointer</dt><dd>Gently shift your view</dd></div></dl><p>Drop an audio file onto the studio to add your soundtrack. The notebook keeps your places and settings, including loop lengths and the layers you chose. The harmonic pad is the foundation and has a level of its own, starting at 70 %. Each world arrives with its own key, space and layers; press KEEP to carry your sound settings from world to world. Click a reel to mute a layer, or ↻ for new lengths. Staging puts every layer at its own distance, from your ears to the horizon; Walking lets them drift slowly. The arrows trigger a portamento call.</p></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="drop-overlay" id="dropOverlay" hidden><svg><use href="#i-sound"/></svg><h2>One sound, a new elsewhere.</h2><p>Drop your music.</p></div>
+  <script type="module" src="./app.js?v=4"></script>
+</body>
+</html>

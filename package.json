@@ -1,0 +1,13 @@
+{
+  "name": "orbite",
+  "version": "2.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A generative cinema studio: twelve imaginary landscapes to drift through, and a place to listen in.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "python3 scripts/serve.py --no-open",
+    "check": "node --check dist/app.js && node --check dist/renderer.js && node --check dist/sound.js && node --check dist/worlds.js && node --check dist/loopra/audio.js && node --check dist/loopra/space.js && node --check dist/loopra/timbre.js && node --check dist/loopra/rng.js",
+    "test": "node --test tests/*.test.mjs"
+  }
+}
