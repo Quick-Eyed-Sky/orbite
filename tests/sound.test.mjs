@@ -36,9 +36,9 @@ test('every world can set its key, mode and layers without error', () => {
   sound.destroy();
 });
 
-test('the harmonic pad starts at 70 % so that it does not mask the other layers', () => {
+test('the harmonic pad starts at 50 % so that it does not mask the other layers', () => {
   const sound = new OrbiteSound({ seed: 3 });
-  assert.equal(sound.getLoopState()[0].level, 0.7);
+  assert.equal(sound.getLoopState()[0].level, 0.5);
   assert.equal(sound.getLoopState()[1].level, 1);
   sound.destroy();
 });
