@@ -31,7 +31,7 @@ function layerMask(world) {
 function stageFor(world, previous = {}) {
   const sound = WORLDS[world].sound;
   return {
-    amount: 100, listening: 'headphones', timbre: 'rich', pad: 70, ...previous,
+    amount: 100, listening: 'headphones', timbre: 'rich', pad: 50, ...previous,
     size: Math.round(sound.size * 100), walk: Math.round(sound.walk * 100), variation: Math.round(sound.variation * 100),
   };
 }

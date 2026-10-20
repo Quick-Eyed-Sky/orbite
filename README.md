@@ -30,7 +30,7 @@ The sound is **Loopra Stage**: thirty-two independent loops, each repeating at i
 - **A place, not a mix.** Each layer sits at its own distance, from *at your ears* (dry, bright, a little to one side on headphones) to *on the horizon* (dark, washed in a very large reverberation). **Staging** sets how far apart they stand, **Walking** lets them drift nearer and farther over minutes, **Space** goes from a small room to a vast hall.
 - **No pass is the same take.** With **Variation** up, every repetition of a loop is a little earlier or later, softer or louder, in a different position. The seed makes it reproducible.
 - **The sounds are visible.** Each sounding layer glows in the landscape at its own distance: near ones large and soft, far ones small and sharp, near the horizon.
-- **The harmonic pad is the foundation.** It has a level of its own, starting at 70 % so that it does not mask the other layers, and sits first in the list.
+- **The harmonic pad is the foundation.** It has a level of its own, starting at 50 % so that it does not mask the other layers, and sits first in the list.
 - **Silk & light starts quiet.** This sustained veil of high notes almost never stops, so it starts at 12 % of its old level; it is still an ordinary on/off layer.
 - Mute any layer, draw new loop lengths, change the musical mode, enrich the harmony, or trigger a portamento call.
 - Or drop your own music (MP3, WAV, M4A, OGG or FLAC, up to 256 MB) onto the studio. It loops and stays in the browser.
